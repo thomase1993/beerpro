@@ -25,11 +25,15 @@ public class Fridge implements Entity {
     @NonNull
     private String userId;
     @NonNull
-    private int amount;
+    private String amount;
     @Nonnull
     private String beerId;
 
     private Date creationDate = new Date();
+
+    public String getBeerId() {
+        return beerId;
+    }
 
     public static String generateId(String userId, String beerId) {
         return String.format("%s_%s", userId, beerId);

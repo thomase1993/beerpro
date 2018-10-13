@@ -96,7 +96,7 @@ public class MyFridgeActivity extends AppCompatActivity implements OnFridgelistI
     }
 
     @Override
-    public void onSaveClickedListener(Beer beer) {
-        throw new NotImplementedException(MyFridgeActivity.class.toString());
+    public void onSaveClickedListener(Fridge fridge, String amount) {
+        model.updateAmountBeer(fridge, amount);
     }
 }

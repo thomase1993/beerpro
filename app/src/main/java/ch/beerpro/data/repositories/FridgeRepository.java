@@ -30,7 +30,7 @@ public class FridgeRepository {
             if (task.isSuccessful() && snapshot.exists()) {
                 return document.update(Fridge.FIELD_amount, snapshot.getLong(Fridge.FIELD_amount) + 1);
             } else if (task.isSuccessful()) {
-                return document.set(new Fridge(userId, 1, beer.getId()));
+                return document.set(new Fridge(userId, "1", beer.getId()));
             } else {
                 throw task.getException();
             }
@@ -55,5 +55,24 @@ public class FridgeRepository {
             }
             return result;
         });
+    }
+
+    public void removeBeer(Beer beer, String userId) {
+        DocumentReference document = FirebaseFirestore.getInstance().collection(Fridge.COLLECTION)
+                .document(Fridge.generateId(userId, beer.getId()));
+
+       document.delete().continueWith(x -> {
+           if(!x.isSuccessful()) {
+               throw x.getException();
+           }
+           return 0;
+       });
+    }
+
+    public void setAmount(String userid, String beerid, String amount) {
+        DocumentReference document = FirebaseFirestore.getInstance().collection(Fridge.COLLECTION)
+                .document(Fridge.generateId(userid, beerid));
+
+        document.update(Fridge.FIELD_amount, amount);
     }
 }

@@ -35,4 +35,8 @@ public class FridgelistViewModel extends ViewModel implements CurrentUser {
     public LiveData<List<Pair<Fridge, Beer>>> getContentWithBeer() {
         return fridgelistRepository.getContentWithBeer(currentUserId.getValue(), beersRepository.getAllBeers());
     }
+
+    public void updateAmountBeer(Fridge fridge, String amount) {
+        fridgelistRepository.setAmount(getCurrentUser().getUid(), fridge.getBeerId(), amount);
+    }
 }

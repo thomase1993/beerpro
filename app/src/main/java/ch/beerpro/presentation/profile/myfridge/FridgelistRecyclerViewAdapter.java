@@ -96,7 +96,7 @@ public class FridgelistRecyclerViewAdapter extends ListAdapter<Pair<Fridge, Beer
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, item));
 
             amount.setText(String.valueOf(fridge.getAmount()));
-            save.setOnClickListener(v -> listener.onSaveClickedListener(item));
+            save.setOnClickListener(v -> listener.onSaveClickedListener(fridge, amount.getText().toString()));
         }
     }
 }
