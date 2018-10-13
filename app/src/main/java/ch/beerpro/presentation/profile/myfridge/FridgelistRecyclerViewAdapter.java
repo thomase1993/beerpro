@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.request.RequestOptions;
 
-import java.text.DateFormat;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -24,7 +22,6 @@ import ch.beerpro.GlideApp;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Fridge;
-import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.utils.EntityPairDiffItemCallback;
 
 

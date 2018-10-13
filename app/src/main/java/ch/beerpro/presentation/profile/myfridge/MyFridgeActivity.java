@@ -50,7 +50,7 @@ public class MyFridgeActivity extends AppCompatActivity implements OnFridgelistI
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.title_activity_wishlist));
+        getSupportActionBar().setTitle(getString(R.string.title_activity_fridgelist));
 
         model = ViewModelProviders.of(this).get(FridgelistViewModel.class);
         model.getContentWithBeer().observe(this, this::updateFridgelist);
