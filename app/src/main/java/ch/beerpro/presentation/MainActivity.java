@@ -16,6 +16,7 @@ import ch.beerpro.presentation.explore.BeerManufacturersFragment;
 import ch.beerpro.presentation.explore.ExploreFragment;
 import ch.beerpro.presentation.profile.ProfileFragment;
 import ch.beerpro.presentation.ratings.RatingsFragment;
+import ch.beerpro.presentation.settings.SettingsActivity;
 import ch.beerpro.presentation.splash.SplashScreenActivity;
 import ch.beerpro.presentation.utils.ViewPagerAdapter;
 import com.firebase.ui.auth.AuthUI;
@@ -111,12 +112,22 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            // TODO THEME chose activity
+            case R.id.action_settings:
+                settings();
+                return true;
             case R.id.action_logout:
                 logout();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void settings() {
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void logout() {

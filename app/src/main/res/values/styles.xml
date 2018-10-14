@@ -67,4 +67,11 @@
         <!--<item name="android:layout_marginLeft">64dp</item>
         <item name="android:layout_marginRight">64dp</item>-->
     </style>
+
+    <!--AppThemeDark-->
+
+    <style name="AppThemeDark" parent="android:Theme.Material.NoActionBar" >
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:colorAccent">@color/accent_material_dark</item>
+    </style>
 </resources>
