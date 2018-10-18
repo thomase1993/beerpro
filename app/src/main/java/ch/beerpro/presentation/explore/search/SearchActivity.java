@@ -19,6 +19,8 @@ import ch.beerpro.presentation.explore.search.beers.SearchResultFragment;
 import ch.beerpro.presentation.explore.search.suggestions.SearchSuggestionsFragment;
 import ch.beerpro.presentation.profile.mybeers.MyBeersViewModel;
 import ch.beerpro.presentation.profile.mybeers.OnMyBeerItemInteractionListener;
+import ch.beerpro.presentation.settings.ThemeChange;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.common.base.Strings;
 
@@ -34,6 +36,7 @@ public class SearchActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChange.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 

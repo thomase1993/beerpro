@@ -17,6 +17,7 @@ import ch.beerpro.presentation.explore.ExploreFragment;
 import ch.beerpro.presentation.profile.ProfileFragment;
 import ch.beerpro.presentation.ratings.RatingsFragment;
 import ch.beerpro.presentation.settings.SettingsActivity;
+import ch.beerpro.presentation.settings.ThemeChange;
 import ch.beerpro.presentation.splash.SplashScreenActivity;
 import ch.beerpro.presentation.utils.ViewPagerAdapter;
 import com.firebase.ui.auth.AuthUI;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChange.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

@@ -3,6 +3,7 @@ package ch.beerpro.presentation.settings;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.ActionBar;
 
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 
 import ch.beerpro.R;
@@ -32,7 +34,7 @@ import java.util.List;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class SettingsActivity extends AppCompatPreferenceActivity {
+public class SettingsActivity extends AppCompatPreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -55,13 +57,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 ? listPreference.getEntries()[index]
                                 : null);
 
+
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
-            }
-            if(true) {
-
             }
             return true;
         }
@@ -99,12 +99,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChange.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setupActionBar();
-
-        super.onCreate(savedInstanceState);
-        setTheme(android.R.style.Theme_Translucent_NoTitleBar); // Set here
-//        setContentView(...)
     }
 
     /**
@@ -117,6 +114,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
+
 
     /**
      * {@inheritDoc}
@@ -144,6 +142,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 || GuiPreferenceFragment.class.getName().equals(fragmentName);
     }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        // TODO set theme
+        if(key != null) {
+            if(sharedPreferences.getString(key, "0").equals("0")) {
+                // AppTheme - Bright
+                ThemeChange.changeToTheme(this, ThemeChange.BRIGHT_THEME);
+            } else {
+                // AppThemeDark - Dark
+                ThemeChange.changeToTheme(this, ThemeChange.DARK_THEME);
+            }
+        }
+    }
+
     /**
      * This fragment shows general preferences only. It is used when the
      * activity is showing a two-pane settings UI.
@@ -160,8 +172,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-//            bindPreferenceSummaryToValue(findPreference("example_text"));
             bindPreferenceSummaryToValue(findPreference("example_list"));
+            getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener((SharedPreferences.OnSharedPreferenceChangeListener) getActivity());
         }
 
         @Override

@@ -25,6 +25,7 @@ import ch.beerpro.presentation.details.DetailsActivity;
 import ch.beerpro.presentation.profile.mywishlist.OnWishlistItemInteractionListener;
 import ch.beerpro.presentation.profile.mywishlist.WishlistRecyclerViewAdapter;
 import ch.beerpro.presentation.profile.mywishlist.WishlistViewModel;
+import ch.beerpro.presentation.settings.ThemeChange;
 import lombok.val;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class MyFridgeActivity extends AppCompatActivity implements OnFridgelistI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChange.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_fridge);
         ButterKnife.bind(this);
