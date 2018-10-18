@@ -3,13 +3,16 @@ package ch.beerpro.presentation.details;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
@@ -26,6 +29,7 @@ import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -74,6 +78,9 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.reportError)
+    Button reportError;
 
     private RatingsRecyclerViewAdapter adapter;
 
@@ -181,6 +188,29 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @OnClick(R.id.reportError)
+    public void sendMail() {
+        composeEmail("admin@beerpro.ch", "Es hat sich ein Fehler eingeschlichen beim Bier " + name.getText(), " (Bitte Mail anpassen) \n \n"
+                + "Hallo Admin, \n \n"
+                + "Es ist fehlerhaft: \n"
+                + "Name: " + name.getText() + "\n"
+                + "Manufaktur: " + manufacturer.getText() + "\n"
+                + "Kategorie: " + category.getText() + "\n"
+                + "Id: " + model.getBeer().getValue().getId()
+        );
+    }
+
+    public void composeEmail(String address, String subject, String mailtext) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:admin@beerpro.ch"));
+        intent.putExtra(Intent.EXTRA_EMAIL, address);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, mailtext);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 }

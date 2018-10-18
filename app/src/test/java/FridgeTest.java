@@ -1,6 +1,7 @@
 import android.content.Context;
 
 import com.google.common.util.concurrent.AbstractScheduledService;
+import com.google.firebase.FirebaseApp;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,6 +28,8 @@ public class FridgeTest {
 
     @Test
     public void FridgeRepositoryAddTest() {
+        FirebaseApp.initializeApp(mMockContext);
+
         FridgeRepository rep = new FridgeRepository();
         Beer b = new Beer("Test", "Brauhaus", "Edeltropfen", "Weizen", "Id", 10 ,1);
         rep.addOrIncrementBeer(b, "user1");
