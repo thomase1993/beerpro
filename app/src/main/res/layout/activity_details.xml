@@ -113,7 +113,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-
                         <TextView
                             android:id="@+id/name"
                             android:layout_width="wrap_content"
@@ -250,6 +249,16 @@
                                 android:text="Bier Teilen"
                                 android:textColor="@android:color/darker_gray"
                                 android:textSize="10sp" />
+                            <Button
+                                android:id="@+id/reportError"
+                                android:layout_width="wrap_content"
+                                style="?android:attr/borderlessButtonStyle"
+                                android:layout_height="match_parent"
+                                android:drawableTop="@drawable/ic_star_black_24dp"
+                                android:drawableTint="@android:color/darker_gray"
+                                android:text="Fehler melden"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="10sp"/>
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
