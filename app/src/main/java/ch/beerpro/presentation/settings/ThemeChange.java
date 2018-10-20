@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import androidx.core.graphics.drawable.DrawableCompat;
 import ch.beerpro.R;
 import ch.beerpro.presentation.MainActivity;
 
+
 public class ThemeChange {
 
-    private static int sTheme = 0;
     public static final int BRIGHT_THEME = 0;
     public static final int DARK_THEME = 1;
 
@@ -28,7 +26,6 @@ public class ThemeChange {
         editor.putString("mValue", Integer.toString(theme));
         editor.commit();
 
-        sTheme = theme;
         activity.finish();
 //        activity.startActivity(new Intent(activity, activity.getClass()));
         activity.startActivity(new Intent(activity, MainActivity.class));
@@ -38,7 +35,7 @@ public class ThemeChange {
     public static void onActivityCreateSetTheme(Activity activity) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        sTheme = Integer.parseInt(prefs.getString("mValue","0"));
+        int sTheme = Integer.parseInt(prefs.getString("mValue","0"));
 
         switch (sTheme) {
             default:

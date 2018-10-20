@@ -16,7 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".presentation.splash.SplashScreenActivity"
-            android:theme="@style/LoginScreenTheme">
+            android:theme="@style/AppThemeDark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,13 +25,15 @@
         </activity>
         <activity
             android:name=".presentation.MainActivity"
-            android:label="@string/title_activity_home_screen" />
-        <activity android:name=".presentation.explore.search.SearchActivity" />
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/AppThemeDark" />
+        <activity android:name=".presentation.explore.search.SearchActivity"
+            android:theme="@style/AppThemeDark" />
         <activity
             android:name=".presentation.details.DetailsActivity"
             android:label="@string/title_activity_single_beer"
             android:parentActivityName=".presentation.explore.search.SearchActivity"
-            android:theme="@style/DetailsPageTheme">
+            android:theme="@style/AppThemeDark">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.explore.search.SearchActivity" />
@@ -39,7 +41,8 @@
         <activity
             android:name=".presentation.details.createrating.CreateRatingActivity"
             android:parentActivityName=".presentation.details.DetailsActivity"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AppThemeDark">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.details.DetailsActivity" />
@@ -47,12 +50,12 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/AppThemeDark" />
         <activity
             android:name=".presentation.profile.mywishlist.WishlistActivity"
             android:label="@string/title_activity_wishlist"
             android:parentActivityName=".presentation.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppThemeDark">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
@@ -61,7 +64,7 @@
             android:name=".presentation.profile.myratings.MyRatingsActivity"
             android:label="@string/title_activity_myratings"
             android:parentActivityName=".presentation.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppThemeDark">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
@@ -70,12 +73,13 @@
             android:name=".presentation.profile.mybeers.MyBeersActivity"
             android:label="@string/title_activity_mybeers"
             android:parentActivityName=".presentation.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppThemeDark">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
         </activity>
-        <activity android:name=".presentation.profile.myfridge.MyFridgeActivity">
+        <activity android:name=".presentation.profile.myfridge.MyFridgeActivity"
+            android:theme="@style/AppThemeDark">
 
         </activity>
         <activity
