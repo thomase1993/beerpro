@@ -29,7 +29,10 @@ import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
+<<<<<<< HEAD
 import ch.beerpro.presentation.settings.ThemeChange;
+=======
+>>>>>>> a87daf0dacc87559ecdabe4c6bc89d23c5bc1b48
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
