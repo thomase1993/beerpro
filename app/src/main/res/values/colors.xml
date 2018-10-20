@@ -11,4 +11,5 @@
     <color name="text_color_primary">#fdd835</color>
     <color name="accent_material_dark">#ffffff</color>
     <color name="primary_dark_material_dark">#00000000</color>
+    <color name="primary_text_material_light">#deffffff</color>
 </resources>
