@@ -22,6 +22,7 @@ import ch.beerpro.GlideApp;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Fridge;
+import ch.beerpro.domain.models.MyBeerFromFridge;
 import ch.beerpro.presentation.utils.EntityPairDiffItemCallback;
 
 

@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
@@ -20,11 +18,8 @@ import butterknife.ButterKnife;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Fridge;
-import ch.beerpro.domain.models.Wish;
+import ch.beerpro.domain.models.MyBeerFromFridge;
 import ch.beerpro.presentation.details.DetailsActivity;
-import ch.beerpro.presentation.profile.mywishlist.OnWishlistItemInteractionListener;
-import ch.beerpro.presentation.profile.mywishlist.WishlistRecyclerViewAdapter;
-import ch.beerpro.presentation.profile.mywishlist.WishlistViewModel;
 import lombok.val;
 
 import java.util.List;
