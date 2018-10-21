@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.List;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
@@ -18,11 +20,8 @@ import butterknife.ButterKnife;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Fridge;
-import ch.beerpro.domain.models.MyBeerFromFridge;
 import ch.beerpro.presentation.details.DetailsActivity;
 import lombok.val;
-
-import java.util.List;
 
 public class MyFridgeActivity extends AppCompatActivity implements OnFridgelistItemInteractionListener {
 
@@ -93,5 +92,6 @@ public class MyFridgeActivity extends AppCompatActivity implements OnFridgelistI
     @Override
     public void onSaveClickedListener(Fridge fridge, String amount) {
         model.updateAmountBeer(fridge, amount);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

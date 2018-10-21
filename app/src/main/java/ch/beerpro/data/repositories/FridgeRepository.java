@@ -15,9 +15,6 @@ import androidx.lifecycle.LiveData;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Entity;
 import ch.beerpro.domain.models.Fridge;
-import ch.beerpro.domain.models.MyBeerFromFridge;
-import ch.beerpro.domain.models.Rating;
-import ch.beerpro.domain.models.User;
 import ch.beerpro.domain.utils.FirestoreQueryLiveDataArray;
 
 import static androidx.lifecycle.Transformations.map;
@@ -87,7 +84,10 @@ public class FridgeRepository {
     public void setAmount(String userid, String beerid, String amount) {
         DocumentReference document = FirebaseFirestore.getInstance().collection(Fridge.COLLECTION)
                 .document(Fridge.generateId(userid, beerid));
-
-        document.update(Fridge.FIELD_amount, amount);
+        if (amount.equals("0") || amount.isEmpty()) {
+            document.delete();
+        } else {
+            document.update(Fridge.FIELD_amount, amount);
+        }
     }
 }
