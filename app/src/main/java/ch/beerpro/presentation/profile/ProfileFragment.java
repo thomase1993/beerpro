@@ -10,6 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.List;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
@@ -18,21 +24,14 @@ import butterknife.OnClick;
 import ch.beerpro.GlideApp;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Fridge;
+import ch.beerpro.domain.models.MyBeer;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.MainViewModel;
 import ch.beerpro.presentation.profile.mybeers.MyBeersActivity;
-import ch.beerpro.domain.models.MyBeer;
 import ch.beerpro.presentation.profile.myfridge.MyFridgeActivity;
 import ch.beerpro.presentation.profile.myratings.MyRatingsActivity;
 import ch.beerpro.presentation.profile.mywishlist.WishlistActivity;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.List;
 
 /**
  * Because the profile view is not a whole activity but rendered as part of the MainActivity in a tab, we use a so-called fragment.
@@ -76,7 +75,7 @@ public class ProfileFragment extends Fragment {
         model.getMyWishlist().observe(this, this::updateWishlistCount);
         model.getMyRatings().observe(this, this::updateRatingsCount);
         model.getMyBeers().observe(this, this::updateMyBeersCount);
-        model.getFridgeContent().observe(this, this::updateFridgeCount);
+        model.getMyFridge().observe(this, this::updateFridgeCount);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
@@ -91,7 +90,11 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateFridgeCount(List<Fridge> o) {
-        myFridgeCount.setText(String.valueOf(o.size()));
+        int sum = 0;
+        for (Fridge f : o) {
+            sum += Integer.valueOf(f.getAmount());
+        }
+        myFridgeCount.setText(String.valueOf(sum));
     }
 
     private void updateMyBeersCount(List<MyBeer> myBeers) {

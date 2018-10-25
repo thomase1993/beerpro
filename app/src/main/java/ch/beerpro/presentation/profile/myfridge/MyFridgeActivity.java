@@ -100,5 +100,6 @@ public class MyFridgeActivity extends AppCompatActivity implements OnFridgelistI
     @Override
     public void onSaveClickedListener(Fridge fridge, String amount) {
         model.updateAmountBeer(fridge, amount);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

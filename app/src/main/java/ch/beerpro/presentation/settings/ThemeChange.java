@@ -12,19 +12,19 @@ import ch.beerpro.presentation.MainActivity;
 
 public class ThemeChange {
 
-    public static final int BRIGHT_THEME = 0;
-    public static final int DARK_THEME = 1;
+    static final int BRIGHT_THEME = 0;
+    static final int DARK_THEME = 1;
 
     public static void initTheme(Activity activity) {
     }
     /**
      * Set the theme of the Activity, and restart it by creating a new Activity of the same type.
      */
-    public static void changeToTheme(Activity activity, int theme) {
+    static void changeToTheme(Activity activity, int theme) {
         SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
         SharedPreferences.Editor editor = myPrefs.edit();
         editor.putString("mValue", Integer.toString(theme));
-        editor.commit();
+        editor.apply();
 
         activity.finish();
         activity.startActivity(new Intent(activity, MainActivity.class));
@@ -43,7 +43,6 @@ public class ThemeChange {
                 break;
             case DARK_THEME:
                 activity.setTheme(R.style.AppThemeDark);
-                break;
         }
     }
 }
