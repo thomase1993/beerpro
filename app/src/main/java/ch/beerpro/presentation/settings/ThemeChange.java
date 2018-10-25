@@ -27,7 +27,6 @@ public class ThemeChange {
         editor.commit();
 
         activity.finish();
-//        activity.startActivity(new Intent(activity, activity.getClass()));
         activity.startActivity(new Intent(activity, MainActivity.class));
     }
 
