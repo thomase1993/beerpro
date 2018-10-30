@@ -16,6 +16,7 @@ import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
+import ch.beerpro.presentation.details.price.PriceFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -63,6 +65,9 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
 
     @BindView(R.id.name)
     TextView name;
+
+    @BindView(R.id.avgPrice)
+    TextView avgPrice;
 
     @BindView(R.id.wishlist)
     ToggleButton wishlist;
@@ -129,6 +134,12 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
     public void showBottomSheetDialog() {
         View view = getLayoutInflater().inflate(R.layout.single_bottom_sheet_dialog, null);
         view.findViewById(R.id.addToFridge).setOnClickListener(model::addBeerToFridge);
+        view.findViewById(R.id.addPrice).setOnClickListener(v -> {
+            DialogFragment newFragment = new PriceFragment();
+            newFragment.show(getSupportFragmentManager(), "missiles");
+
+        });
+
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(view);
         dialog.show();
@@ -146,6 +157,7 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         avgRating.setText(getResources().getString(R.string.fmt_avg_rating, item.getAvgRating()));
         numRatings.setText(getResources().getString(R.string.fmt_ratings, item.getNumRatings()));
         toolbar.setTitle(item.getName());
+        avgPrice.setText("Preis: ~" + item.getAvgPrice());
     }
 
     private void updateRatings(List<Rating> ratings) {
@@ -212,5 +224,20 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    public void updatePrice(float priceInput) {
+        int numPrices = model.getBeer().getValue().getNumPrices();
+        float averagePrice = model.getBeer().getValue().getAvgPrice();
+        if (numPrices == 0) {
+            model.getBeer().getValue().setAvgPrice(priceInput);
+            model.getBeer().getValue().setNumPrices(1);
+            return;
+        }
+        float newPrice = averagePrice * ((numPrices -1 )/ numPrices);
+        newPrice = newPrice + priceInput * (1/numPrices);
+        model.getBeer().getValue().setAvgPrice(newPrice);
+        model.getBeer().getValue().setNumRatings(numPrices+1);
+
     }
 }

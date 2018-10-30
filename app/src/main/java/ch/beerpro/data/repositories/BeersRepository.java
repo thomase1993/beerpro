@@ -60,4 +60,8 @@ public class BeersRepository {
         return map(allBeers, mapBeersToManufacturers);
     }
 
+    public static void updatePrice(Beer beer) {
+        
+    }
+
 }
