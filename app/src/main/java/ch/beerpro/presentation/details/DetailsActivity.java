@@ -227,17 +227,19 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
     }
 
     public void updatePrice(float priceInput) {
-        int numPrices = model.getBeer().getValue().getNumPrices();
-        float averagePrice = model.getBeer().getValue().getAvgPrice();
+        Beer beer = model.getBeer().getValue();
+        int numPrices = beer.getNumPrices();
+        float averagePrice = beer.getAvgPrice();
         if (numPrices == 0) {
-            model.getBeer().getValue().setAvgPrice(priceInput);
-            model.getBeer().getValue().setNumPrices(1);
-            return;
+            beer.setAvgPrice(priceInput);
+            beer.setNumPrices(1);
         }
-        float newPrice = averagePrice * ((numPrices -1 )/ numPrices);
-        newPrice = newPrice + priceInput * (1/numPrices);
-        model.getBeer().getValue().setAvgPrice(newPrice);
-        model.getBeer().getValue().setNumRatings(numPrices+1);
-
+        else {
+            float newPrice = averagePrice * ((float)numPrices / (numPrices + 1f));
+            newPrice = newPrice + priceInput * (1f / ((float)numPrices + 1f));
+            beer.setAvgPrice(newPrice);
+            beer.setNumPrices(numPrices + 1);
+        }
+        model.updateBeerPrice(beer);
     }
 }

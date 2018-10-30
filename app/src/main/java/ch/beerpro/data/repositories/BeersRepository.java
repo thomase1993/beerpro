@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.utils.FirestoreQueryLiveData;
 import ch.beerpro.domain.utils.FirestoreQueryLiveDataArray;
+
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
@@ -61,7 +63,10 @@ public class BeersRepository {
     }
 
     public static void updatePrice(Beer beer) {
-        
+        DocumentReference document = FirebaseFirestore.getInstance().collection(Beer.COLLECTION).document(beer.getId());
+
+        document.update("avgPrice",beer.getAvgPrice());
+        document.update("numPrices",beer.getNumPrices());
     }
 
 }
