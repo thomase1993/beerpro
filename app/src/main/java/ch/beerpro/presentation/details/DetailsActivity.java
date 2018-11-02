@@ -133,7 +133,6 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
     @OnClick(R.id.actionsButton)
     public void showBottomSheetDialog() {
         View view = getLayoutInflater().inflate(R.layout.single_bottom_sheet_dialog, null);
-        view.findViewById(R.id.addToFridge).setOnClickListener(model::addBeerToFridge);
         view.findViewById(R.id.addPrice).setOnClickListener(v -> {
             DialogFragment newFragment = new PriceFragment();
             newFragment.show(getSupportFragmentManager(), "missiles");
@@ -141,6 +140,10 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         });
 
         BottomSheetDialog dialog = new BottomSheetDialog(this);
+        view.findViewById(R.id.addToFridge).setOnClickListener((x) -> {
+            model.addBeerToFridge(x);
+            dialog.dismiss();
+        });
         dialog.setContentView(view);
         dialog.show();
     }
