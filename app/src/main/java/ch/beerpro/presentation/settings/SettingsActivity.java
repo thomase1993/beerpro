@@ -144,7 +144,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Sha
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        // TODO set theme
+        // Set theme
         if(key != null) {
             if(sharedPreferences.getString(key, "0").equals("0")) {
                 // AppTheme - Bright

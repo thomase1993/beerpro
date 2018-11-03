@@ -1,5 +1,5 @@
 <resources>
-
+    <!--AppTheme-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -71,7 +71,6 @@
     </style>
 
     <!--AppThemeDark-->
-
     <style name="AppThemeDark" parent="Theme.AppCompat.NoActionBar" >
         <item name="android:textColorPrimary">@color/text_color_primary</item>
         <item name="android:colorAccent">@color/accent_material_dark</item>

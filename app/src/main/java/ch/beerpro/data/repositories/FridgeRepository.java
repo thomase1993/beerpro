@@ -5,6 +5,7 @@ import android.util.Pair;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import ch.beerpro.domain.models.Fridge;
 import ch.beerpro.domain.utils.FirestoreQueryLiveDataArray;
 
 import static androidx.lifecycle.Transformations.map;
+import static androidx.lifecycle.Transformations.switchMap;
 import static ch.beerpro.domain.utils.LiveDataExtensions.combineLatest;
 
 public class FridgeRepository {
@@ -37,14 +39,14 @@ public class FridgeRepository {
         });
     }
 
-    public LiveData<List<Fridge>> getContent(String userId) {
+    public LiveData<List<Fridge>> getContent(LiveData<String> userId) {
         return new FirestoreQueryLiveDataArray<>(FirebaseFirestore.getInstance()
                 .collection(Fridge.COLLECTION).whereEqualTo(Fridge.FIELD_USER_ID, userId),
                 Fridge.class);
     }
 
-    public LiveData<List<Pair<Fridge, Beer>>> getContentWithBeer(String currentUserId, LiveData<List<Beer>> allBeers) {
-        return map(combineLatest(getContent(currentUserId), map(allBeers, Entity::entitiesById)), input -> {
+    public LiveData<List<Pair<Fridge, Beer>>> getContentWithBeer(LiveData<String> currentUserId, LiveData<List<Beer>> allBeers) {
+        return map(combineLatest(getMyFridge(currentUserId), map(allBeers, Entity::entitiesById)), input -> {
             List<Fridge> fridges = input.first;
             HashMap<String, Beer> beersById = input.second;
 
@@ -69,10 +71,23 @@ public class FridgeRepository {
        });
     }
 
+    public LiveData<List<Fridge>> getMyFridge(LiveData<String> currentUserId) {
+        return switchMap(currentUserId, FridgeRepository::getFridgeByUser);
+    }
+
+    public static LiveData<List<Fridge>> getFridgeByUser(String userId) {
+        return new FirestoreQueryLiveDataArray<>(FirebaseFirestore.getInstance().collection(Fridge.COLLECTION)
+                .orderBy(Fridge.FIELD_CREATION_DATE, Query.Direction.DESCENDING)
+                .whereEqualTo(Fridge.FIELD_USER_ID, userId), Fridge.class);
+    }
+
     public void setAmount(String userid, String beerid, String amount) {
         DocumentReference document = FirebaseFirestore.getInstance().collection(Fridge.COLLECTION)
                 .document(Fridge.generateId(userid, beerid));
-
-        document.update(Fridge.FIELD_amount, amount);
+        if (amount.equals("0") || amount.isEmpty()) {
+            document.delete();
+        } else {
+            document.update(Fridge.FIELD_amount, amount);
+        }
     }
 }
