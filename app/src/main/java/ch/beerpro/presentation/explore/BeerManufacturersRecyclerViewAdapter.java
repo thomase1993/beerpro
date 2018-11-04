@@ -58,7 +58,7 @@ public class BeerManufacturersRecyclerViewAdapter
         void bind(String item, int position, BeerManufacturersFragment.OnItemSelectedListener listener) {
             content.setText(item);
             Context resources = itemView.getContext();
-            imageView.setImageDrawable(BackgroundImageProvider.getBackgroundImage(resources, position + 10));
+            imageView.setImageDrawable(BackgroundImageProvider.getBackgroundImage(position + 10));
             if (listener != null) {
                 itemView.setOnClickListener(v -> listener.onBeerManufacturerSelected(item));
             }
