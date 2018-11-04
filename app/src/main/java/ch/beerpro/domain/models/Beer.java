@@ -23,5 +23,7 @@ public class Beer implements Entity, Serializable {
     private String photo;
     private float avgRating;
     private int numRatings;
+    private float avgPrice;
+    private int numPrices;
 
 }
