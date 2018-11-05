@@ -119,7 +119,7 @@ public class BeerCategoriesRecyclerViewAdapter
         void bind(String item, int position, BeerCategoriesFragment.OnItemSelectedListener listener) {
             content.setText(item);
             Context resources = itemView.getContext();
-            imageView.setImageDrawable(BackgroundImageProvider.getBackgroundImage(position));
+            imageView.setImageDrawable(BackgroundImageProvider.getBackgroundImage(resources, position));
             if (listener != null) {
                 itemView.setOnClickListener(v -> listener.onBeerCategorySelected(item));
             }
