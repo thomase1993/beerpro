@@ -1,6 +1,7 @@
 package ch.beerpro.presentation.details;
 
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -31,6 +32,7 @@ import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
 import ch.beerpro.presentation.details.price.PriceFragment;
+import ch.beerpro.presentation.details.privateNote.PrivateNoteFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -139,6 +141,11 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
 
         });
 
+        view.findViewById(R.id.addPrivateNote).setOnClickListener(v -> {
+            DialogFragment newFragment = new PrivateNoteFragment();
+            newFragment.show(getSupportFragmentManager(), "missiles");
+        });
+
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         view.findViewById(R.id.addToFridge).setOnClickListener((x) -> {
             model.addBeerToFridge(x);
@@ -244,5 +251,9 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
             beer.setNumPrices(numPrices + 1);
         }
         model.updateBeerPrice(beer);
+    }
+
+    public void updatePrivateNote(String note) {
+        model.updatePrivateNote(note);
     }
 }
