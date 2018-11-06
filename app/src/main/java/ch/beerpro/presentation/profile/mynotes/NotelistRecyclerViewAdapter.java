@@ -74,8 +74,11 @@ public class NotelistRecyclerViewAdapter extends ListAdapter<Pair<PrivateNote, B
         @BindView(R.id.numRatings)
         TextView numRatings;
 
-        @BindView(R.id.addedAt)
-        TextView addedAt;
+        @BindView(R.id.topText)
+        TextView topText;
+
+        @BindView(R.id.bottomText)
+        TextView bottomText;
 
         @BindView(R.id.removeFromWishlist)
         Button remove;
@@ -96,10 +99,10 @@ public class NotelistRecyclerViewAdapter extends ListAdapter<Pair<PrivateNote, B
             ratingBar.setRating(item.getAvgRating());
             numRatings.setText(itemView.getResources().getString(R.string.fmt_num_ratings, item.getNumRatings()));
             itemView.setOnClickListener(v -> listener.onMoreClickedListener(photo, item));
-
-            //String formattedDate =
-             //       DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT).format(note.getAddedAt());
-            //addedAt.setText(formattedDate);
+            String[] text = note.getNote().split("\\n");
+            topText.setText(text[0]);
+            if(text.length > 1) { bottomText.setText(text[1]);}
+            else {bottomText.setText("");}
             remove.setOnClickListener(v -> listener.onWishClickedListener(item));
         }
 
