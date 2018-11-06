@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
@@ -17,8 +18,11 @@ import ch.beerpro.presentation.explore.ExploreFragment;
 import ch.beerpro.presentation.profile.ProfileFragment;
 import ch.beerpro.presentation.ratings.RatingsFragment;
 import ch.beerpro.presentation.splash.SplashScreenActivity;
+import ch.beerpro.presentation.utils.BackgroundImageProvider;
 import ch.beerpro.presentation.utils.ViewPagerAdapter;
+
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -64,6 +68,12 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
+
+        BackgroundImageProvider p = new BackgroundImageProvider(this.getResources());
+        Tasks.call(() -> {
+            p.loadImages();
+            return 1;
+        });
     }
 
     private void setupViewPager(ViewPager viewPager, TabLayout tabLayout) {
