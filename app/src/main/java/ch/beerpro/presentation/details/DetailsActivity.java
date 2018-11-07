@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
+import ch.beerpro.domain.models.PrivateNote;
 import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
 import ch.beerpro.presentation.details.price.PriceFragment;
 import ch.beerpro.presentation.details.privateNote.PrivateNoteFragment;
@@ -256,4 +258,5 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
     public void updatePrivateNote(String note) {
         model.updatePrivateNote(note);
     }
+    public LiveData<PrivateNote> getNoteText() {return model.getNoteText();}
 }

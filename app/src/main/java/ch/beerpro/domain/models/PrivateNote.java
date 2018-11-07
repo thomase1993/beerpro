@@ -35,7 +35,7 @@ public class PrivateNote implements Entity {
     private String beerId;
     @NonNull
     private String note;
-    @NonNull
+
     private Date addedAt;
 
     public static String generateId(String userId, String beerId) {

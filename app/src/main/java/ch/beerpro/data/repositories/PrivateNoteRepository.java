@@ -1,8 +1,12 @@
 package ch.beerpro.data.repositories;
 
+import android.util.Log;
 import android.util.Pair;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -16,6 +20,7 @@ import ch.beerpro.domain.models.Entity;
 import ch.beerpro.domain.models.PrivateNote;
 import ch.beerpro.domain.utils.FirestoreQueryLiveData;
 import ch.beerpro.domain.utils.FirestoreQueryLiveDataArray;
+import lombok.NonNull;
 
 import static androidx.lifecycle.Transformations.map;
 import static androidx.lifecycle.Transformations.switchMap;

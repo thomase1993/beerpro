@@ -10,6 +10,7 @@ import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.PrivateNote;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
+
 import com.google.android.gms.tasks.Task;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class DetailsViewModel extends ViewModel implements CurrentUser {
     private final LiveData<Beer> beer;
     private final LiveData<List<Rating>> ratings;
     private final LiveData<Wish> wish;
+    private MutableLiveData<String> currentUserId;
 
     private final LikesRepository likesRepository;
     private final WishlistRepository wishlistRepository;
@@ -34,7 +36,7 @@ public class DetailsViewModel extends ViewModel implements CurrentUser {
         wishlistRepository = new WishlistRepository();
         privateNoteRepository = new PrivateNoteRepository();
 
-        MutableLiveData<String> currentUserId = new MutableLiveData<>();
+        currentUserId = new MutableLiveData<>();
         beer = beersRepository.getBeer(beerId);
         wish = wishlistRepository.getMyWishForBeer(currentUserId, getBeer());
         ratings = ratingsRepository.getRatingsForBeer(beerId);
@@ -79,5 +81,10 @@ public class DetailsViewModel extends ViewModel implements CurrentUser {
         pn.setBeerId(beer.getValue().getId());
         pn.setUserId(getCurrentUser().getUid());
         pn.setNote(privateNote);
-        privateNoteRepository.UpdatePrivateNote(pn);}
+        privateNoteRepository.UpdatePrivateNote(pn);
+    }
+
+    public LiveData<PrivateNote> getNoteText() {
+        return privateNoteRepository.getMyNoteForBeer(currentUserId,beer);
+    }
 }
