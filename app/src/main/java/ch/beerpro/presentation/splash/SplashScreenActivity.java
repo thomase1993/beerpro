@@ -9,8 +9,11 @@ import android.util.Log;
 import ch.beerpro.R;
 import ch.beerpro.presentation.MainActivity;
 import ch.beerpro.domain.models.User;
+import ch.beerpro.presentation.utils.BackgroundImageProvider;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -46,7 +49,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                     .setTheme(R.style.LoginScreenTheme).build(), RC_SIGN_IN);
         } else {
             Log.i(TAG, "User found, redirect to Home screen");
-            redirectToHomeScreenActivity(currentUser);
+            BackgroundImageProvider p = new BackgroundImageProvider(this.getResources());
+            p.loadImages().addOnCompleteListener(x -> redirectToHomeScreenActivity(currentUser));
         }
     }
 
@@ -71,7 +75,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 Log.i(TAG, "User signed in");
-                redirectToHomeScreenActivity(firebaseUser);
+                BackgroundImageProvider p = new BackgroundImageProvider(this.getResources());
+                p.loadImages().addOnCompleteListener((task) -> redirectToHomeScreenActivity(firebaseUser));
             } else if (response == null) {
                 Log.w(TAG, "User cancelled signing in");
             } else {

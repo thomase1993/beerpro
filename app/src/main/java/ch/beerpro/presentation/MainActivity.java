@@ -68,12 +68,6 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
-
-        BackgroundImageProvider p = new BackgroundImageProvider(this.getResources());
-        Tasks.call(() -> {
-            p.loadImages();
-            return 1;
-        });
     }
 
     private void setupViewPager(ViewPager viewPager, TabLayout tabLayout) {
