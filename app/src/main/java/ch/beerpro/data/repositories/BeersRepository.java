@@ -65,8 +65,10 @@ public class BeersRepository {
     public static void updatePrice(Beer beer) {
         DocumentReference document = FirebaseFirestore.getInstance().collection(Beer.COLLECTION).document(beer.getId());
 
-        document.update("avgPrice",beer.getAvgPrice());
-        document.update("numPrices",beer.getNumPrices());
+        document.update(Beer.FIELD_AVGPRICE,beer.getAvgPrice());
+        document.update(Beer.FIELD_NUMPRICES,beer.getNumPrices());
+        document.update(Beer.FIELD_MAXPRICE,beer.getMaxPrice());
+        document.update(Beer.FIELD_MINPRICE,beer.getMinPrice());
     }
 
 }

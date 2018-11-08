@@ -1,6 +1,7 @@
 package ch.beerpro.presentation.details;
 
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,8 +31,10 @@ import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
+import ch.beerpro.domain.models.PrivateNote;
 import ch.beerpro.presentation.details.createrating.CreateRatingActivity;
 import ch.beerpro.presentation.details.price.PriceFragment;
+import ch.beerpro.presentation.details.privateNote.PrivateNoteFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -38,6 +42,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static ch.beerpro.presentation.utils.DrawableHelpers.setDrawableTint;
 
@@ -139,6 +144,11 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
 
         });
 
+        view.findViewById(R.id.addPrivateNote).setOnClickListener(v -> {
+            DialogFragment newFragment = new PrivateNoteFragment();
+            newFragment.show(getSupportFragmentManager(), "missiles");
+        });
+
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         view.findViewById(R.id.addToFridge).setOnClickListener((x) -> {
             model.addBeerToFridge(x);
@@ -160,7 +170,16 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         avgRating.setText(getResources().getString(R.string.fmt_avg_rating, item.getAvgRating()));
         numRatings.setText(getResources().getString(R.string.fmt_ratings, item.getNumRatings()));
         toolbar.setTitle(item.getName());
-        avgPrice.setText("Preis: ~" + item.getAvgPrice());
+        if (item.getNumPrices() == 0) { avgPrice.setText("Kein Preis Vorhanden");}
+        else {
+            avgPrice.setText("Preis(CHF): " + CHF(item.getMinPrice()) + " - " + CHF(item.getMaxPrice()) +
+                    ", Durchschnitt: " + CHF(item.getAvgPrice()) + " aus " + item.getNumPrices());
+        }
+    }
+
+    private String CHF(float input) {
+        Locale ch_de = new Locale("de","ch");
+        return String.format(ch_de,"%.2f",input);
     }
 
     private void updateRatings(List<Rating> ratings) {
@@ -230,19 +249,11 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
     }
 
     public void updatePrice(float priceInput) {
-        Beer beer = model.getBeer().getValue();
-        int numPrices = beer.getNumPrices();
-        float averagePrice = beer.getAvgPrice();
-        if (numPrices == 0) {
-            beer.setAvgPrice(priceInput);
-            beer.setNumPrices(1);
-        }
-        else {
-            float newPrice = averagePrice * ((float)numPrices / (numPrices + 1f));
-            newPrice = newPrice + priceInput * (1f / ((float)numPrices + 1f));
-            beer.setAvgPrice(newPrice);
-            beer.setNumPrices(numPrices + 1);
-        }
-        model.updateBeerPrice(beer);
+        model.updateBeerPrice(priceInput);
     }
+
+    public void updatePrivateNote(String note) {
+        model.updatePrivateNote(note);
+    }
+    public LiveData<PrivateNote> getNoteText() {return model.getNoteText();}
 }
