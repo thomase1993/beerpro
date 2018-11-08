@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.utils.FirestoreQueryLiveData;
 import ch.beerpro.domain.utils.FirestoreQueryLiveDataArray;
+
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
@@ -58,6 +60,15 @@ public class BeersRepository {
 
     public LiveData<List<String>> getBeerManufacturers() {
         return map(allBeers, mapBeersToManufacturers);
+    }
+
+    public static void updatePrice(Beer beer) {
+        DocumentReference document = FirebaseFirestore.getInstance().collection(Beer.COLLECTION).document(beer.getId());
+
+        document.update(Beer.FIELD_AVGPRICE,beer.getAvgPrice());
+        document.update(Beer.FIELD_NUMPRICES,beer.getNumPrices());
+        document.update(Beer.FIELD_MAXPRICE,beer.getMaxPrice());
+        document.update(Beer.FIELD_MINPRICE,beer.getMinPrice());
     }
 
 }

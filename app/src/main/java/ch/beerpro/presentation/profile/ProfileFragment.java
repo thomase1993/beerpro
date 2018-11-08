@@ -30,6 +30,7 @@ import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.MainViewModel;
 import ch.beerpro.presentation.profile.mybeers.MyBeersActivity;
 import ch.beerpro.presentation.profile.myfridge.MyFridgeActivity;
+import ch.beerpro.presentation.profile.mynotes.NotelistActivity;
 import ch.beerpro.presentation.profile.myratings.MyRatingsActivity;
 import ch.beerpro.presentation.profile.mywishlist.WishlistActivity;
 
@@ -123,6 +124,12 @@ public class ProfileFragment extends Fragment {
     public void handleMyFridgeCount(View v) {
         Log.d(TAG, "test");
         Intent intent = new Intent(getActivity(), MyFridgeActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.myNotelist)
+    public void handleMyNotelistClick(View view) {
+        Intent intent = new Intent(getActivity(), NotelistActivity.class);
         startActivity(intent);
     }
 

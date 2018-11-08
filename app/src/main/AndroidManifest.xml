@@ -88,6 +88,7 @@
             android:theme="@style/AppTheme">
 
         </activity>
+        <activity android:name=".presentation.profile.mynotes.NotelistActivity"></activity>
     </application>
 
 </manifest>

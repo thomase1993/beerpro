@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
@@ -19,8 +20,11 @@ import ch.beerpro.presentation.ratings.RatingsFragment;
 import ch.beerpro.presentation.settings.SettingsActivity;
 import ch.beerpro.presentation.settings.ThemeChange;
 import ch.beerpro.presentation.splash.SplashScreenActivity;
+import ch.beerpro.presentation.utils.BackgroundImageProvider;
 import ch.beerpro.presentation.utils.ViewPagerAdapter;
+
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
