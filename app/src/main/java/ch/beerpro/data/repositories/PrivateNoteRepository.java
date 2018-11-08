@@ -32,7 +32,11 @@ public class PrivateNoteRepository {
         note.setId(note.generateId(note.getUserId(), note.getBeerId()));
         DocumentReference document = FirebaseFirestore.getInstance().collection(PrivateNote.COLLECTION)
                 .document(note.getId());
-        document.set(note);
+        if (note.getNote() == "") {
+            document.delete();
+        } else {
+            document.set(note);
+        }
     }
 
     private static LiveData<List<PrivateNote>> getNotesByUser(String userId) {
@@ -50,7 +54,7 @@ public class PrivateNoteRepository {
     }
 
     public LiveData<List<Pair<PrivateNote, Beer>>> getMyNotelistWithBeers(LiveData<String> currentUserId,
-                                                                   LiveData<List<Beer>> allBeers) {
+                                                                          LiveData<List<Beer>> allBeers) {
         return map(combineLatest(getMyNotelist(currentUserId), map(allBeers, Entity::entitiesById)), input -> {
             List<PrivateNote> notes = input.first;
             HashMap<String, Beer> beersById = input.second;
