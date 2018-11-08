@@ -206,6 +206,41 @@
                     android:layout_marginEnd="@dimen/default_margin"
                     android:text="0" />
             </LinearLayout>
+            <LinearLayout
+
+                android:id="@+id/myNotelist"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/minimum_margin"
+                    app:srcCompat="@drawable/ic_bookmark_brown_24dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Private Notizen" />
+
+
+                <TextView
+                    android:id="@+id/myNotelistCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:text="0" />
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
