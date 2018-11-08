@@ -14,6 +14,10 @@ public class Beer implements Entity, Serializable {
 
     public static final String COLLECTION = "beers";
     public static final String FIELD_NAME = "name";
+    public static final String FIELD_AVGPRICE = "avgPrice";
+    public static final String FIELD_NUMPRICES = "numPrices";
+    public static final String FIELD_MAXPRICE = "maxPrice";
+    public static final String FIELD_MINPRICE = "minPrice";
 
     @Exclude
     private String id;
@@ -25,5 +29,7 @@ public class Beer implements Entity, Serializable {
     private int numRatings;
     private float avgPrice;
     private int numPrices;
+    private float minPrice;
+    private float maxPrice;
 
 }

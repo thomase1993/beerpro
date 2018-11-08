@@ -72,7 +72,28 @@ public class DetailsViewModel extends ViewModel implements CurrentUser {
         fridgeRepository.addOrIncrementBeer(beer.getValue(), getCurrentUser().getUid());
     }
 
-    public void updateBeerPrice(Beer b) {
+    public void updateBeerPrice(float inputPrice) {
+        if (inputPrice <= 0) {return;} // Throws away really nonsensical negative values
+        Beer b = beer.getValue();
+
+        int numPrices = b.getNumPrices();
+        float averagePrice = b.getAvgPrice();
+        if (numPrices == 0) {
+            b.setAvgPrice(inputPrice);
+            b.setNumPrices(1);
+            b.setMinPrice(inputPrice);
+            b.setMaxPrice(inputPrice);
+        }
+        else {
+            float newPrice = averagePrice * ((float)numPrices / (numPrices + 1f));
+            newPrice = newPrice + inputPrice * (1f / ((float)numPrices + 1f));
+            b.setAvgPrice(newPrice);
+            b.setNumPrices(numPrices + 1);
+
+            if(b.getMaxPrice()<inputPrice) {b.setMaxPrice(inputPrice);}
+            if(b.getMinPrice()>inputPrice) {b.setMinPrice(inputPrice);}
+        }
+
         BeersRepository.updatePrice(b);
     }
 

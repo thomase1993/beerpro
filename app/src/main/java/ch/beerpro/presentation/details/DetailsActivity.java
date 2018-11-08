@@ -42,6 +42,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static ch.beerpro.presentation.utils.DrawableHelpers.setDrawableTint;
 
@@ -169,7 +170,16 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
         avgRating.setText(getResources().getString(R.string.fmt_avg_rating, item.getAvgRating()));
         numRatings.setText(getResources().getString(R.string.fmt_ratings, item.getNumRatings()));
         toolbar.setTitle(item.getName());
-        avgPrice.setText("Preis: ~" + item.getAvgPrice());
+        if (item.getNumPrices() == 0) { avgPrice.setText("Kein Preis Vorhanden");}
+        else {
+            avgPrice.setText("Preis(CHF): " + CHF(item.getMinPrice()) + " - " + CHF(item.getMaxPrice()) +
+                    ", Durchschnitt: " + CHF(item.getAvgPrice()) + " aus " + item.getNumPrices());
+        }
+    }
+
+    private String CHF(float input) {
+        Locale ch_de = new Locale("de","ch");
+        return String.format(ch_de,"%.2f",input);
     }
 
     private void updateRatings(List<Rating> ratings) {
@@ -239,20 +249,7 @@ public class DetailsActivity extends AppCompatActivity implements OnRatingLikedL
     }
 
     public void updatePrice(float priceInput) {
-        Beer beer = model.getBeer().getValue();
-        int numPrices = beer.getNumPrices();
-        float averagePrice = beer.getAvgPrice();
-        if (numPrices == 0) {
-            beer.setAvgPrice(priceInput);
-            beer.setNumPrices(1);
-        }
-        else {
-            float newPrice = averagePrice * ((float)numPrices / (numPrices + 1f));
-            newPrice = newPrice + priceInput * (1f / ((float)numPrices + 1f));
-            beer.setAvgPrice(newPrice);
-            beer.setNumPrices(numPrices + 1);
-        }
-        model.updateBeerPrice(beer);
+        model.updateBeerPrice(priceInput);
     }
 
     public void updatePrivateNote(String note) {
