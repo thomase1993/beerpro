@@ -16,7 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".presentation.splash.SplashScreenActivity"
-            android:theme="@style/AppThemeDark">
+            android:theme="@style/LoginScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,13 +27,12 @@
             android:name=".presentation.MainActivity"
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppThemeDark" />
-        <activity android:name=".presentation.explore.search.SearchActivity"
-            android:theme="@style/AppThemeDark" />
+        <activity android:name=".presentation.explore.search.SearchActivity" />
         <activity
             android:name=".presentation.details.DetailsActivity"
             android:label="@string/title_activity_single_beer"
             android:parentActivityName=".presentation.explore.search.SearchActivity"
-            android:theme="@style/AppThemeDark">
+            android:theme="@style/DetailsPageTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.explore.search.SearchActivity" />
@@ -41,8 +40,7 @@
         <activity
             android:name=".presentation.details.createrating.CreateRatingActivity"
             android:parentActivityName=".presentation.details.DetailsActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppThemeDark">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.details.DetailsActivity" />
@@ -50,12 +48,12 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeDark" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".presentation.profile.mywishlist.WishlistActivity"
             android:label="@string/title_activity_wishlist"
             android:parentActivityName=".presentation.MainActivity"
-            android:theme="@style/AppThemeDark">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
@@ -64,7 +62,7 @@
             android:name=".presentation.profile.myratings.MyRatingsActivity"
             android:label="@string/title_activity_myratings"
             android:parentActivityName=".presentation.MainActivity"
-            android:theme="@style/AppThemeDark">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
@@ -73,22 +71,18 @@
             android:name=".presentation.profile.mybeers.MyBeersActivity"
             android:label="@string/title_activity_mybeers"
             android:parentActivityName=".presentation.MainActivity"
-            android:theme="@style/AppThemeDark">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
         </activity>
-        <activity android:name=".presentation.profile.myfridge.MyFridgeActivity"
-            android:theme="@style/AppThemeDark">
-
-        </activity>
+<<<<<<< Updated upstream
+        <activity android:name=".presentation.profile.myfridge.MyFridgeActivity"></activity>
+=======
         <activity
             android:name=".presentation.settings.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme">
-
-        </activity>
-        <activity android:name=".presentation.profile.mynotes.NotelistActivity"></activity>
+            android:label="@string/title_activity_settings"></activity>
+>>>>>>> Stashed changes
     </application>
 
 </manifest>

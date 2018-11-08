@@ -104,7 +104,22 @@
     <string name="title_activity_mybeers">Meine Biere</string>
     <string name="action_search">Bier suchen</string>
     <string name="title_activity_fridgelist">Kühlschrank</string>
+    <string name="title_activity_settings">Settings</string>
 
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">Theme Settings</string>
+
+    <string name="pref_title_add_friends_to_messages">Theme App</string>
+    <string-array name="pref_gui_list_titles">
+        <item>Dark</item>
+        <item>Bright</item>
+    </string-array>
+    <string-array name="pref_gui_list_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

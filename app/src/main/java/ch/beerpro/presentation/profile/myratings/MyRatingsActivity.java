@@ -15,6 +15,7 @@ import ch.beerpro.R;
 import ch.beerpro.domain.models.Rating;
 import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.DetailsActivity;
+import ch.beerpro.presentation.settings.ThemeChange;
 import lombok.val;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class MyRatingsActivity extends AppCompatActivity implements OnMyRatingIt
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChange.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_ratings);
         ButterKnife.bind(this);

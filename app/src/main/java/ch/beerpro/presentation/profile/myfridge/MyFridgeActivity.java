@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import java.util.List;
+import org.apache.commons.lang3.NotImplementedException;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,8 +20,15 @@ import butterknife.ButterKnife;
 import ch.beerpro.R;
 import ch.beerpro.domain.models.Beer;
 import ch.beerpro.domain.models.Fridge;
+import ch.beerpro.domain.models.Wish;
 import ch.beerpro.presentation.details.DetailsActivity;
+import ch.beerpro.presentation.profile.mywishlist.OnWishlistItemInteractionListener;
+import ch.beerpro.presentation.profile.mywishlist.WishlistRecyclerViewAdapter;
+import ch.beerpro.presentation.profile.mywishlist.WishlistViewModel;
+import ch.beerpro.presentation.settings.ThemeChange;
 import lombok.val;
+
+import java.util.List;
 
 public class MyFridgeActivity extends AppCompatActivity implements OnFridgelistItemInteractionListener {
 
@@ -39,6 +46,7 @@ public class MyFridgeActivity extends AppCompatActivity implements OnFridgelistI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeChange.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_fridge);
         ButterKnife.bind(this);
